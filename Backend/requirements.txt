@@ -1,0 +1,9 @@
+streamlit
+python-dotenv
+requests
+python-pptx
+docx2txt
+PyPDF2
+langchain
+langchain-text-splitters
+numpy

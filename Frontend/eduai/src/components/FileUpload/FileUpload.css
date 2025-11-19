@@ -1,0 +1,250 @@
+/* ===============================================
+   GLOBAL PAGE LAYOUT
+================================================ */
+html, body {
+  /* background: #0A0F24 !important; */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  color: #ffffff;
+}
+
+.quiz-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #0A0F24;
+  display: flex;
+  justify-content: center;
+  align-items: center;  /* ✅ FIX */
+  padding: 40px 20px;
+}
+
+
+.quiz-container {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* Center EVERYTHING vertically */
+  align-items: center;       /* Center horizontally */
+  min-height: 100vh;         /* Full page height */
+  text-align: center;        /* Align text */
+}
+
+
+
+/* ===============================================
+   HEADERS
+================================================ */
+.main-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 32px;
+  color: #BFC4D9;
+}
+
+/* ===============================================
+   UPLOAD SECTION
+================================================ */
+.upload-card {
+  background: #0F122C;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: 0px 0px 14px rgba(108,99,255,0.25);
+  margin: 0 auto;     /* ✅ FIX: center horizontally */
+  width: 100%;
+  max-width: 500px;   /* optional: keeps card clean */
+}
+
+.upload-card h3 {
+  margin-bottom: 6px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.upload-card p {
+  margin-bottom: 20px;
+  color: #BFC4D9;
+}
+
+/* Custom File Input */
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: inline-block;
+  background: #6C63FF;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.25s ease;
+}
+
+.file-label:hover {
+  background: #8F85FF;
+}
+
+/* ===============================================
+   BUTTONS
+================================================ */
+.upload-btn,
+.submit-btn,
+.restart-btn {
+  background: #6C63FF;
+  color: #ffffff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0px 6px 14px rgba(108, 99, 255, 0.25);
+  transition: 0.25s ease;
+}
+
+.upload-btn:hover,
+.submit-btn:hover,
+.restart-btn:hover {
+  background: #8F85FF;
+}
+
+.message {
+  margin-top: 12px;
+  color: #E3E6F5;
+}
+
+/* ===============================================
+   QUIZ SECTION
+================================================ */
+.quiz-section h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* MCQ CARD */
+.mcq-card {
+  background: linear-gradient(145deg, #0E1430, #11173A);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 20px;
+  margin: 0 auto 24px auto;
+  max-width: 850px;
+  width: 100%;
+  box-shadow: 0px 0px 16px rgba(108, 99, 255, 0.18);
+}
+
+.question-text {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  line-height: 1.55;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.options-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+/* Options */
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.option-label:hover {
+  background: rgba(108, 99, 255, 0.12);
+  border-color: #6C63FF;
+}
+
+.option-label input {
+  transform: scale(1.2);
+  accent-color: #6C63FF;
+}
+
+.option-label.selected {
+  background: rgba(108, 99, 255, 0.18);
+  border-color: #8F85FF;
+}
+
+/* ===============================================
+   RESULT SECTION
+================================================ */
+.result-section {
+  margin-top: 20px;
+}
+
+.result-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.score-display {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 24px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.review-card {
+  background: #0F122C;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0px 0px 12px rgba(108, 99, 255, 0.18);
+}
+
+.correct {
+  color: #5CFF9D;
+  font-weight: 600;
+}
+
+.wrong {
+  color: #FF6B6B;
+  font-weight: 600;
+}
+
+.correct-answer {
+  margin-top: 6px;
+  color: #8F85FF;
+  font-weight: 500;
+}
+
+/* Loading text */
+.loader-text {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
