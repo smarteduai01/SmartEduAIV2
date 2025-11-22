@@ -3,7 +3,7 @@ import json
 from flask import Flask, request, jsonify
 import tempfile
 from flask_cors import CORS
-
+from feedback import generate_feedback_from_result, normalize_to_feedback_json
 
 import numpy as np
 from dotenv import load_dotenv
@@ -124,6 +124,29 @@ based ONLY on the retrieved context below.
     print(mcqs)
     return jsonify({"mcqs": mcqs})
 
+@app.route("/generate_feedback", methods=["POST"])
+def generate_feedback_route():
+    try:
+        data = request.json
+        if not data:
+            return jsonify({"error": "No result JSON received"}), 400
+
+        # Raw Gemini text (not guaranteed to be JSON)
+        feedback_raw = generate_feedback_from_result(data)
+        print("\n================ RAW GEMINI FEEDBACK ================")
+        print(feedback_raw)
+        print("=====================================================\n")
+
+
+        # Convert messy LLM text → valid JSON with 5 sections
+        feedback_json = normalize_to_feedback_json(feedback_raw)
+
+        return jsonify({
+            "feedback": feedback_json
+        }), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # ---------------------------------------------------------
 # RUN SERVER

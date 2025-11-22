@@ -1,0 +1,497 @@
+/* ================================================================
+   LAYOUT WRAPPER — FULL WIDTH, CENTERED CONTENT
+================================================================ */
+.results-feedback-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 100vh;
+  padding: 60px 80px;
+  gap: 50px;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1429 100%);
+  position: relative;
+  overflow: hidden;
+
+  /* Fade-in animation */
+  animation: fadeIn 1s ease-out;
+}
+
+/* Animated background particles */
+.results-feedback-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(108, 99, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(157, 146, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(92, 255, 157, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  animation: floatingGlow 15s ease-in-out infinite;
+}
+
+@keyframes floatingGlow {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.1) rotate(5deg); opacity: 0.8; }
+}
+
+
+/* ================================================================
+   LEFT SECTION (USER REVIEW)
+================================================================ */
+.left-side {
+  width: 48%;
+  animation: slideInLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* ---- Main Title ---- */
+.rf-title {
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 28px;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e4fa 50%, #b8b3ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+  position: relative;
+  animation: slideDown 0.7s ease-out;
+}
+
+.rf-title::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 80px;
+  height: 5px;
+  background: linear-gradient(90deg, #6c63ff, #9d92ff);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(108, 99, 255, 0.6);
+}
+
+
+/* ---- Score Box ---- */
+.rf-score {
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.15) 0%, rgba(157, 146, 255, 0.1) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 24px 28px;
+  border-radius: 20px;
+  margin-bottom: 35px;
+  font-size: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(108, 99, 255, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: fadeInUp 0.9s ease-out;
+  position: relative;
+  overflow: hidden;
+  color: #e0e4fa;
+}
+
+.rf-score::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.rf-score strong {
+  color: #5CFF9D;
+  font-size: 28px;
+  font-weight: 900;
+  text-shadow: 0 0 20px rgba(92, 255, 157, 0.6);
+}
+
+
+/* ---- Question Card (Ultra Modern) ---- */
+.rf-review-card {
+  background: linear-gradient(135deg, rgba(17, 21, 45, 0.85) 0%, rgba(11, 15, 36, 0.95) 100%);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  padding: 28px 30px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 6px solid transparent;
+  background-image: 
+    linear-gradient(135deg, rgba(17, 21, 45, 0.85) 0%, rgba(11, 15, 36, 0.95) 100%),
+    linear-gradient(90deg, #6c63ff, #9d92ff);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  margin-bottom: 28px;
+  box-shadow: 
+    0 10px 40px rgba(108, 99, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: slideInLeft 0.7s ease;
+  position: relative;
+}
+
+.rf-review-card:hover {
+  transform: translateX(8px) scale(1.02);
+  box-shadow: 
+    0 15px 50px rgba(108, 99, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-left-width: 8px;
+}
+
+.rf-review-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* Question text */
+.rf-question {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #ffffff;
+  line-height: 1.6;
+  letter-spacing: -0.3px;
+}
+
+.rf-question strong {
+  color: #9d92ff;
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+/* Correct / Wrong styling */
+.rf-correct {
+  color: #5CFF9D;
+  font-weight: 800;
+  font-size: 17px;
+  padding: 8px 16px;
+  background: rgba(92, 255, 157, 0.08);
+  border-radius: 12px;
+  display: inline-block;
+  margin-top: 8px;
+  border-left: 4px solid #5CFF9D;
+  box-shadow: 0 0 20px rgba(92, 255, 157, 0.15);
+}
+
+.rf-wrong {
+  color: #FF6B6B;
+  font-weight: 800;
+  font-size: 17px;
+  padding: 8px 16px;
+  background: rgba(255, 107, 107, 0.08);
+  border-radius: 12px;
+  display: inline-block;
+  margin-top: 8px;
+  border-left: 4px solid #FF6B6B;
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.15);
+}
+
+.rf-correct-answer {
+  margin-top: 12px;
+  color: #b8b3ff;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px 16px;
+  background: rgba(157, 146, 255, 0.08);
+  border-radius: 12px;
+  border-left: 4px solid #9d92ff;
+}
+
+
+/* ---- Restart Button ---- */
+.restart-btn {
+  margin-top: 40px;
+  padding: 18px 40px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  background: linear-gradient(135deg, #6c63ff 0%, #9d92ff 100%);
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 
+    0 10px 30px rgba(108, 99, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+}
+
+.restart-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.restart-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.restart-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 15px 40px rgba(108, 99, 255, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.restart-btn:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+
+/* ================================================================
+   RIGHT SECTION (FEEDBACK PANEL)
+================================================================ */
+.right-side {
+  width: 48%;
+  animation: slideInRight 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* ---- Feedback Panel ---- */
+.rf-feedback-panel {
+  background: linear-gradient(135deg, rgba(17, 23, 55, 0.8) 0%, rgba(10, 15, 36, 0.9) 100%);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  padding: 42px 40px;
+  border-radius: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 
+    0 20px 60px rgba(108, 99, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  animation: slideInRight 0.8s ease;
+}
+
+/* Decorative gradient bars */
+.rf-feedback-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 8px;
+  width: 100%;
+  background: linear-gradient(90deg, #6c63ff 0%, #9d92ff 50%, #b8b3ff 100%);
+  box-shadow: 0 0 20px rgba(108, 99, 255, 0.6);
+}
+
+.rf-feedback-panel::after {
+  content: "";
+  position: absolute;
+  top: 50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(108, 99, 255, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+
+/* ---- Feedback Title ---- */
+.rf-feedback-title {
+  font-size: 38px;
+  font-weight: 900;
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, #ffffff 0%, #b8b3ff 50%, #9d92ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  text-align: left;
+  text-shadow: 0 0 30px rgba(108, 99, 255, 0.4);
+  animation: fadeInDown 0.7s;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ---- Feedback Body ---- */
+.rf-feedback-content {
+  color: #e0e4fa;
+  line-height: 1.9;
+  font-size: 17px;
+  padding-right: 10px;
+  animation: fadeIn 1.1s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Section Headlines */
+.rf-feedback-content h3 {
+  margin-top: 32px;
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  border-left: 6px solid #6c63ff;
+  padding-left: 16px;
+  background: linear-gradient(90deg, rgba(108, 99, 255, 0.1) 0%, transparent 100%);
+  border-radius: 0 8px 8px 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  box-shadow: 0 0 20px rgba(108, 99, 255, 0.15);
+}
+
+/* Lists */
+.rf-feedback-content ul {
+  margin-left: 26px;
+  margin-top: 16px;
+}
+
+.rf-feedback-content li {
+  margin-bottom: 12px;
+  color: #d0d5ef;
+  padding-left: 8px;
+  position: relative;
+  line-height: 1.8;
+}
+
+.rf-feedback-content li::marker {
+  color: #9d92ff;
+  font-weight: 700;
+}
+
+
+/* ---- Loading Text ---- */
+.rf-loading {
+  text-align: center;
+  color: #e0e4fa;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 40px;
+  padding: 30px;
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(157, 146, 255, 0.05) 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+
+/* ================================================================
+   ANIMATIONS
+================================================================ */
+
+/* Fade In */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Slide down */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Slide Up */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Slide in Left */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Slide in Right */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Fade In Down */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Soft pulsing */
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+
+/* ================================================================
+   RESPONSIVE DESIGN
+================================================================ */
+@media (max-width: 1200px) {
+  .results-feedback-wrapper {
+    padding: 40px 50px;
+    gap: 40px;
+  }
+  
+  .rf-title {
+    font-size: 36px;
+  }
+  
+  .rf-feedback-title {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .results-feedback-wrapper {
+    flex-direction: column;
+    padding: 30px 20px;
+    gap: 30px;
+  }
+  
+  .left-side,
+  .right-side {
+    width: 100%;
+  }
+  
+  .rf-title {
+    font-size: 30px;
+  }
+  
+  .rf-score {
+    font-size: 20px;
+  }
+  
+  .rf-feedback-title {
+    font-size: 28px;
+  }
+  
+  .rf-review-card {
+    padding: 22px 24px;
+  }
+  
+  .restart-btn {
+    width: 100%;
+  }
+}
+/* Make both columns same height + scroll inside */

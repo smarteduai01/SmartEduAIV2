@@ -15,23 +15,22 @@ html, body {
   min-height: 100vh;
   background: #0A0F24;
   display: flex;
-  justify-content: center;
-  align-items: center;  /* ✅ FIX */
-  padding: 40px 20px;
+  width: 100%;
+  min-height: 100vh;
+  background: #0A0F24;
+  padding: 40px 0;
 }
 
 
 .quiz-container {
   width: 100%;
-  max-width: 850px;
-  margin: 0 auto;
-
+  max-width: 100%;   /* allow full page width */
+  margin: 0;
+  padding: 0 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* Center EVERYTHING vertically */
-  align-items: center;       /* Center horizontally */
-  min-height: 100vh;         /* Full page height */
-  text-align: center;        /* Align text */
+  text-align: center;
+  align-items: center;   /* keep upload centered */
 }
 
 
@@ -248,3 +247,22 @@ html, body {
   font-weight: 600;
   text-align: center;
 }
+
+.feedback-box {
+  background: #111827;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  color: white;
+}
+
+.feedback-box h2 {
+  margin-bottom: 10px;
+}
+
+.feedback-content {
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+

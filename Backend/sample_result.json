@@ -1,0 +1,80 @@
+{
+  "userID": "user_123",
+  "score": 6,
+  "total_questions": 8,
+
+  "mcq": {
+    "Which of the following numbers is a composite number?": {
+      "options": ["17", "23", "31", "21"],
+      "correct_option": "21",
+      "chosen_option": "21",
+      "is_correct": true
+    },
+    "The greatest common divisor of two integers a and b (not both zero) is defined as:": {
+      "options": [
+        "The largest integer d such that d|a and d|b",
+        "The smallest positive integer divisible by both a and b",
+        "The product of a and b",
+        "The sum of a and b"
+      ],
+      "correct_option": "The largest integer d such that d|a and d|b",
+      "chosen_option": "The largest integer d such that d|a and d|b",
+      "is_correct": true
+    }
+  },
+
+  "multiple_correct": {
+    "Which of the following pairs of integers are relatively prime?": {
+      "options": [
+        "A) 17 and 22",
+        "B) 24 and 36",
+        "C) 10 and 17",
+        "D) 10 and 24"
+      ],
+      "correct_options": ["A", "C"],
+      "chosen_options": ["A", "C"],
+      "is_correct": true
+    },
+    "According to the Fundamental Theorem of Arithmetic, which of the following statements are true for an integer greater than 1?": {
+      "options": [
+        "A) It can be written uniquely as a prime or as the product of two or more primes.",
+        "B) Its prime factors are written in order of nondecreasing size.",
+        "C) It must be a Mersenne prime.",
+        "D) It can only have two factors: 1 and itself."
+      ],
+      "correct_options": ["A", "B"],
+      "chosen_options": ["A", "B", "D"],
+      "is_correct": false
+    }
+  },
+
+  "fill_in_the_blanks": {
+    "Twin primes are pairs of primes that differ by ____.": {
+      "options": [],
+      "correct_option": "2",
+      "chosen_option": "2",
+      "is_correct": true
+    },
+    "The conjecture that every even integer n, n > 2, is the sum of two primes is named after ____.": {
+      "options": [],
+      "correct_option": "Goldbach",
+      "chosen_option": "Goldbach",
+      "is_correct": true
+    }
+  },
+
+  "true_false": {
+    "The number 2^n-1 cannot be prime when n is not prime.": {
+      "options": ["True", "False"],
+      "correct_option": "True",
+      "chosen_option": "True",
+      "is_correct": true
+    },
+    "The Prime Number Theorem states that there are infinitely many prime numbers.": {
+      "options": ["True", "False"],
+      "correct_option": "False",
+      "chosen_option": "True",
+      "is_correct": false
+    }
+  }
+}

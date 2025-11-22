@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./FileUpload.css";
+import FeedbackPanel from "../Feedback/FeedbackPanel";
+
+
 
 const AIMcqgenerator = () => {
   const [file, setFile] = useState(null);
@@ -9,7 +12,7 @@ const AIMcqgenerator = () => {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [reviewData, setReviewData] = useState([]);
+  const [reviewData, setReviewData] = useState({});  
   const [reviewLoading, setReviewLoading] = useState(false);
 
   // ---------------- FILE SELECT ----------------
@@ -42,7 +45,6 @@ const AIMcqgenerator = () => {
         return;
       }
 
-      // Convert backend object → array
       const formatted = Object.entries(data.mcqs).map(
         ([question, details]) => ({
           question,
@@ -72,6 +74,62 @@ const AIMcqgenerator = () => {
     return q.correct_answer.trim();
   };
 
+  // ---------------- BUILD RESULT JSON ----------------
+  const buildResultJSON = (finalScore) => {
+    const mcqSection = {};
+
+    mcqs.forEach((q, idx) => {
+      const chosen = selectedOptions[idx] || "";
+      const correct = resolveCorrect(q);
+
+      mcqSection[q.question] = {
+        options: q.options,
+        correct_option: correct,
+        chosen_option: chosen,
+        is_correct:
+          chosen.trim().toLowerCase() === correct.trim().toLowerCase(),
+      };
+    });
+
+    return {
+      userID: "user_001",
+      score: finalScore,
+      total_questions: mcqs.length,
+      mcq: mcqSection,
+      multiple_correct: {},
+      fill_in_the_blanks: {},
+      true_false: {},
+    };
+  };
+
+  // ---------------- FEEDBACK API ----------------
+  const sendFeedbackRequest = async (finalScore) => {
+    setReviewLoading(true);
+
+    try {
+      const resultJSON = buildResultJSON(finalScore);
+
+      const res = await fetch("http://localhost:5000/generate_feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(resultJSON),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setMessage(data.error || "Failed to generate feedback");
+        return;
+      }
+
+      setReviewData(data.feedback);
+    } catch (err) {
+      setMessage("Backend error while generating feedback.");
+    } finally {
+      setReviewLoading(false);
+    }
+  };
+
   // ---------------- SUBMIT MCQ ----------------
   const handleSubmit = () => {
     let scoreTemp = 0;
@@ -79,16 +137,15 @@ const AIMcqgenerator = () => {
     mcqs.forEach((q, idx) => {
       const userAns = selectedOptions[idx];
       const correct = resolveCorrect(q);
-
-      if (
-        userAns?.trim().toLowerCase() === correct.trim().toLowerCase()
-      ) {
+      if (userAns?.trim().toLowerCase() === correct.trim().toLowerCase()) {
         scoreTemp++;
       }
     });
 
     setScore(scoreTemp);
     setSubmitted(true);
+
+    sendFeedbackRequest(scoreTemp);  // FIX: send final score
   };
 
   // ---------------- RESTART ----------------
@@ -99,16 +156,16 @@ const AIMcqgenerator = () => {
     setScore(0);
     setFile(null);
     setMessage("");
+    setReviewData("");
   };
 
   return (
     <div className="quiz-wrapper">
       <div className="quiz-container">
-        {/* HEADER */}
+
         <h1 className="main-title">AI-Powered MCQ Generator</h1>
         <p className="subtitle">Upload your material and generate MCQs instantly</p>
 
-        {/* LOADING */}
         {loading && <h3>Generating your quiz...</h3>}
 
         {/* UPLOAD SECTION */}
@@ -118,19 +175,17 @@ const AIMcqgenerator = () => {
             <p>Supports PDF, DOCX, PPTX</p>
 
             <div className="file-input-wrapper">
-                <input
-                    type="file"
-                    id="file-upload"
-                    accept=".pdf,.docx,.pptx"
-                    onChange={handleFileChange}
-                    className="file-input"
-                />
-
-                <label htmlFor="file-upload" className="file-label">
-                    {file ? file.name : "Select File"}
-                </label>
+              <input
+                type="file"
+                id="file-upload"
+                accept=".pdf,.docx,.pptx"
+                onChange={handleFileChange}
+                className="file-input"
+              />
+              <label htmlFor="file-upload" className="file-label">
+                {file ? file.name : "Select File"}
+              </label>
             </div>
-
 
             <button
               className="upload-btn"
@@ -180,40 +235,19 @@ const AIMcqgenerator = () => {
           </div>
         )}
 
-        {/* RESULTS SECTION */}
+        {/* RESULT + FEEDBACK SECTION */}
         {submitted && (
-          <div className="result-section">
-            <h2>Quiz Complete</h2>
-            <p className="score-display">
-              Score: <strong>{score}</strong> / {mcqs.length}
-            </p>
-
-            {mcqs.map((q, index) => {
-              const userAns = selectedOptions[index];
-              const correct = resolveCorrect(q);
-              const correctBool =
-                userAns?.trim().toLowerCase() === correct.trim().toLowerCase();
-
-              return (
-                <div className="review-card" key={index}>
-                  <p><strong>Q{index + 1}.</strong> {q.question}</p>
-
-                  <p className={correctBool ? "correct" : "wrong"}>
-                    Your Answer: {userAns}
-                  </p>
-
-                  {!correctBool && (
-                    <p className="correct-answer">Correct Answer: {correct}</p>
-                  )}
-                </div>
-              );
-            })}
-
-            <button className="restart-btn" onClick={handleRestart}>
-              Upload Another File
-            </button>
-          </div>
+          <FeedbackPanel
+            mcqs={mcqs}
+            selectedOptions={selectedOptions}
+            score={score}
+            reviewData={reviewData}
+            reviewLoading={reviewLoading}
+            handleRestart={handleRestart}
+          />
         )}
+
+
       </div>
     </div>
   );
